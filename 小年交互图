@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>小年快乐！</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #ffe0bd, #ff9a9e);
+      font-family: "Microsoft YaHei", sans-serif;
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    h1 {
+      color: #c23531;
+      font-size: 28px;
+      margin: 20px 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    .scene {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .item {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .item:hover {
+      transform: scale(1.1);
+    }
+    #message {
+      min-height: 40px;
+      font-size: 20px;
+      color: #d32f2f;
+      margin: 20px auto;
+      padding: 10px;
+      max-width: 90%;
+      background: rgba(255,255,255,0.7);
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .show { opacity: 1 !important; }
+    .footer {
+      margin-top: 30px;
+      color: #5a2a27;
+      font-size: 14px;
+    }
+    audio { display: none; }
+  </style>
+</head>
+<body>
+  <h1>🏮 小年快乐！🏮</h1>
+  <div class="scene">
+    <img src="https://cdn-icons-png.flaticon.com/512/3003/3003962.png" alt="糖瓜" class="item" id="tanggua" title="点我吃糖瓜">
+    <img src="https://cdn-icons-png.flaticon.com/512/2521/2521922.png" alt="灶王爷" class="item" id="zaowang" title="灶王爷赐福">
+    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991155.png" alt="红包" class="item" id="hongbao" title="点我领好运">
+  </div>
+  <div id="message">甜甜蜜蜜一整年！</div>
+  <div class="footer">上天言好事 · 下界保平安</div>
+
+  <script>
+    const messages = [
+      "甜甜蜜蜜一整年！",
+      "上天言好事，下界保平安！",
+      "财源滚滚，好运连连！",
+      "万事如意，阖家幸福！",
+      "小年吉祥，福气满满！",
+      "灶火兴旺，日子红火！"
+    ];
+    
+    const messageEl = document.getElementById('message');
+    
+    document.getElementById('tanggua').addEventListener('click', () => {
+      messageEl.textContent = "甜甜蜜蜜一整年！";
+      messageEl.classList.add('show');
+    });
+    
+    document.getElementById('zaowang').addEventListener('click', () => {
+      messageEl.textContent = "上天言好事，下界保平安！";
+      messageEl.classList.add('show');
+      // 模拟语音（实际可用 Web Speech API，但微信兼容性差，改用文字）
+    });
+    
+    document.getElementById('hongbao').addEventListener('click', () => {
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      messageEl.textContent = randomMsg;
+      messageEl.classList.add('show');
+    });
+    
+    // 点击空白处隐藏
+    document.body.addEventListener('click', (e) => {
+      if (!e.target.closest('.item')) {
+        messageEl.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
